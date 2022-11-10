@@ -13,9 +13,11 @@ GTA5 Kick else player ,reference YimMenu
 写这个项目的主要精力都花费到了Ui.hpp和Ui.cpp,因为我之前根本就没用过imgui(如果觉得这个Ui很难看,在Ui.cpp->DrawUi函数中从新写一个)
 
 总结:这个菜单写着玩的,不懂的自己琢磨
+
 -----------------chinese------------------------
 :)
 -----------------english------------------------
+
 This project is based on YimMenu written (https://github.com/YimMenu/YimMenu)
 
 This menu can be separated by clicking the button to remove the player (send the command to other players to remove the specified player).
@@ -27,5 +29,6 @@ Because the separation kick will probably be removed by the "rage" (I think it's
 Ui.hpp and ui.cpp were my main efforts in writing this project, because I had never used imgui before (if you think this Ui is ugly, check ui.cpp -&gt; Write a new one in our DrawUi function.
 
 Conclusion: This menu is written to play, don't understand their own thinking
+
 -----------------english------------------------
  
