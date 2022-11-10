@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="services">
+      <UniqueIdentifier>{7fe03f99-e9bb-41be-9e50-e392f798354e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="services\player">
+      <UniqueIdentifier>{67fa5c89-1456-4f47-a894-e35f1d1499a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="services\friends">
+      <UniqueIdentifier>{192a0546-f83c-47c3-9162-7a64f76a125c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kick">
+      <UniqueIdentifier>{8e230059-f2d3-4d9c-93a5-2f5a1f26e91f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main">
+      <UniqueIdentifier>{f74b6e06-e46e-4921-98f5-46d04db9a58e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="memory">
+      <UniqueIdentifier>{3d05ee58-876e-4688-8d55-8b77ab92a772}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="my_utils">
+      <UniqueIdentifier>{da370035-a670-45c2-9e94-8c811bb1fa5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ui">
+      <UniqueIdentifier>{11bec60e-f75a-4ead-9c4e-e278ebf27ee4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Kick.cpp">
+      <Filter>kick</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>services\player</Filter>
+    </ClCompile>
+    <ClCompile Include="player_service.cpp">
+      <Filter>services\player</Filter>
+    </ClCompile>
+    <ClCompile Include="friends_service.cpp">
+      <Filter>services\friends</Filter>
+    </ClCompile>
+    <ClCompile Include="memory\batch.cpp">
+      <Filter>memory</Filter>
+    </ClCompile>
+    <ClCompile Include="memory\byte_patch.cpp">
+      <Filter>memory</Filter>
+    </ClCompile>
+    <ClCompile Include="memory\module.cpp">
+      <Filter>memory</Filter>
+    </ClCompile>
+    <ClCompile Include="memory\pattern.cpp">
+      <Filter>memory</Filter>
+    </ClCompile>
+    <ClCompile Include="memory\range.cpp">
+      <Filter>memory</Filter>
+    </ClCompile>
+    <ClCompile Include="common.hpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="gta_util.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="pointers.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="MyUtils.cpp">
+      <Filter>my_utils</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
+    <ClCompile Include="vmt_hook.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="invoker.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Kick.h">
+      <Filter>kick</Filter>
+    </ClInclude>
+    <ClInclude Include="player_service.hpp">
+      <Filter>services\player</Filter>
+    </ClInclude>
+    <ClInclude Include="player.hpp">
+      <Filter>services\player</Filter>
+    </ClInclude>
+    <ClInclude Include="friends_service.hpp">
+      <Filter>services\friends</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\batch.hpp">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\byte_patch.hpp">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\fwddec.hpp">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\handle.hpp">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\module.hpp">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\pattern.hpp">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\range.hpp">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\all.hpp">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="function_types.hpp">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="gta_util.hpp">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="pointers.hpp">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="MyUtils.hpp">
+      <Filter>my_utils</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.hpp">
+      <Filter>ui</Filter>
+    </ClInclude>
+    <ClInclude Include="vmt_hook.hpp">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="invoker.hpp">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="crossmap.hpp">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="natives.hpp">
+      <Filter>main</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="invoker_asm.asm">
+      <Filter>main</Filter>
+    </MASM>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="libMinHook.x64.lib">
+      <Filter>资源文件</Filter>
+    </Library>
+    <Library Include="bin\lib\Release\ImGui.lib">
+      <Filter>资源文件</Filter>
+    </Library>
+  </ItemGroup>
+</Project>
