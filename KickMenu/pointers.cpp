@@ -68,36 +68,6 @@ namespace big
 		auto mem_region = memory::module(nullptr);
 		main_batch.run(mem_region);
 //-------------------------------------------------------------------------------------------------------
-		/**
-		* Freemode thread restorer through VM patch
-		*/
-		
-		if (auto pat1 = mem_region.scan("3b 0a 0f 83 ? ? ? ? 48 ff c7"))
-		{
-			memory::byte_patch::make(pat1.add(2).as<uint32_t*>(), 0xc9310272)->apply();
-			memory::byte_patch::make(pat1.add(6).as<uint16_t*>(), 0x9090)->apply();
-		}
-
-		if (auto pat2 = mem_region.scan("3b 0a 0f 83 ? ? ? ? 49 03 fa"))
-		{
-			memory::byte_patch::make(pat2.add(2).as<uint32_t*>(), 0xc9310272)->apply();
-			memory::byte_patch::make(pat2.add(6).as<uint16_t*>(), 0x9090)->apply();
-		}
-
-		auto pat3 = mem_region.scan_all("3b 11 0f 83 ? ? ? ? 48 ff c7");
-		for (auto& handle : pat3)
-		{
-			memory::byte_patch::make(handle.add(2).as<uint32_t*>(), 0xd2310272)->apply();
-			memory::byte_patch::make(handle.add(6).as<uint16_t*>(), 0x9090)->apply();
-		}
-
-		auto pat4 = mem_region.scan_all("3b 11 0f 83 ? ? ? ? 49 03 fa");
-		for (auto& handle : pat4)
-		{
-			memory::byte_patch::make(handle.add(2).as<uint32_t*>(), 0xd2310272)->apply();
-			memory::byte_patch::make(handle.add(6).as<uint16_t*>(), 0x9090)->apply();
-		}
-//-------------------------------------------------------------------------------------------------------
 		m_hwnd = FindWindowW(L"grcWindow", nullptr);
 
 		if (!m_hwnd)
