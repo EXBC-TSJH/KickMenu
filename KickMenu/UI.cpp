@@ -8,8 +8,6 @@
 #include "player.hpp"
 #include "pointers.hpp"
 #include "vmt_hook.hpp"
-#include "natives.hpp"
-#include "invoker.hpp"
 #include "gta_util.hpp"
 
 #include "imgui.h"
@@ -33,7 +31,6 @@ inline std::atomic_bool Menu_opened{ false };
 bool for_close_button = false;
 
 IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-static void DISABLE_CONTROL_ACTION(int padIndex, int control, BOOL disable) { invoke<void>(0xFE99B66D079CF6BC, padIndex, control, disable); } // 0xFE99B66D079CF6BC 0x3800C0DC b323
 
 big::comptr<IDXGISwapChain> dxgi_swapchain;
 big::comptr<ID3D11Device> d3d_device;
@@ -80,11 +77,6 @@ BOOL Init_UI()
 		Menu_opened = true;
 		for_close_button = true;
 	}
-
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-	big::g_native_invoker.cache_handlers();	//script
-
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	if (big::g_pointers) 
@@ -97,7 +89,6 @@ BOOL Init_UI()
 		p_swapchain_hook = &m_swapchain_hook;
 	}
 	else { return FALSE; }
-
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	OriginalWndProc = WNDPROC(SetWindowLongPtrW(big::g_pointers->m_hwnd, GWLP_WNDPROC, LONG_PTR(&wndProc)));
@@ -132,11 +123,11 @@ LRESULT WINAPI wndProc(HWND window, UINT msg, WPARAM wParam, LPARAM lParam)
 	if (!for_close_button)
 		big::g_running = false;
 
-	if (Menu_opened && for_close_button)
-		BlockMouseMessageToGTA5();
-
 	if(Menu_opened && for_close_button)
 		ImGui_ImplWin32_WndProcHandler(window, msg, wParam, lParam);
+
+	if (Menu_opened)
+		return true;
 
 	return CallWindowProcW(OriginalWndProc,window, msg, wParam, lParam);
 }
@@ -212,36 +203,3 @@ void DrawUi()
 	
 	ImGui::End();
 }
-//-------------------------------------------------------------
-void BlockMouseMessageToGTA5()
-{
-	for (uint8_t i = 0; i <= 6; i++)
-		DISABLE_CONTROL_ACTION(2, i, true);
-
-	DISABLE_CONTROL_ACTION(2, 106, true);
-	DISABLE_CONTROL_ACTION(2, 329, true);
-	DISABLE_CONTROL_ACTION(2, 330, true);
-
-	DISABLE_CONTROL_ACTION(2, 14, true);
-	DISABLE_CONTROL_ACTION(2, 15, true);
-	DISABLE_CONTROL_ACTION(2, 16, true);
-	DISABLE_CONTROL_ACTION(2, 17, true);
-	DISABLE_CONTROL_ACTION(2, 24, true);
-	DISABLE_CONTROL_ACTION(2, 69, true);
-	DISABLE_CONTROL_ACTION(2, 70, true);
-	DISABLE_CONTROL_ACTION(2, 84, true);			
-	DISABLE_CONTROL_ACTION(2, 85, true);
-	DISABLE_CONTROL_ACTION(2, 99, true);
-	DISABLE_CONTROL_ACTION(2, 92, true);
-	DISABLE_CONTROL_ACTION(2, 100, true);
-	DISABLE_CONTROL_ACTION(2, 114, true);
-	DISABLE_CONTROL_ACTION(2, 115, true);
-	DISABLE_CONTROL_ACTION(2, 121, true);
-	DISABLE_CONTROL_ACTION(2, 142, true);
-	DISABLE_CONTROL_ACTION(2, 241, true);
-	DISABLE_CONTROL_ACTION(2, 261, true);
-	DISABLE_CONTROL_ACTION(2, 257, true);
-	DISABLE_CONTROL_ACTION(2, 262, true);
-	DISABLE_CONTROL_ACTION(2, 331, true);
-}
-//-------------------------------------------------------------

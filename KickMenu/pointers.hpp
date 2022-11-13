@@ -5,7 +5,6 @@
 #include "common.hpp"
 #include "function_types.hpp"
 #include "socialclub/FriendRegistry.hpp"
-#include "natives.hpp"
 
 namespace big
 {
@@ -21,13 +20,8 @@ namespace big
 		CNetworkPlayerMgr** m_network_player_mgr{};
 		FriendRegistry* m_friend_registry{};
 
+		//you can get this pointer to use D3D11CreateDeviceAndSwapChain,but Yim is use feature Code,I don't know why him do that
 		IDXGISwapChain** m_swapchain{};
-		
-		functions::get_native_handler m_get_native_handler{};
-		rage::scrNativeRegistrationTable* m_native_registration_table{};
-		functions::fix_vectors m_fix_vectors{};
-
-		PVOID m_native_return;
 
 		functions::get_connection_peer m_get_connection_peer;
 		functions::send_remove_gamer_cmd m_send_remove_gamer_cmd;
