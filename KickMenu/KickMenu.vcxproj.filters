@@ -79,6 +79,9 @@
     <ClCompile Include="vmt_hook.cpp">
       <Filter>main</Filter>
     </ClCompile>
+    <ClCompile Include="invoker.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Kick.h">
@@ -135,6 +138,20 @@
     <ClInclude Include="vmt_hook.hpp">
       <Filter>main</Filter>
     </ClInclude>
+    <ClInclude Include="invoker.hpp">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="crossmap.hpp">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="natives.hpp">
+      <Filter>main</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="invoker_asm.asm">
+      <Filter>main</Filter>
+    </MASM>
   </ItemGroup>
   <ItemGroup>
     <Library Include="libMinHook.x64.lib">

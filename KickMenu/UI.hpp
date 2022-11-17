@@ -2,9 +2,10 @@
 #include <Windows.h>
 #include <dxgi.h>
 #include "common.hpp"
-#include "vmt_hook.hpp"
+#include "natives.hpp"
 
-#define MENU_TOGGLE VK_END
+#define MENU_TOGGLE VK_INSERT
+#define UNLOAD_TOGGLE VK_END
 
 typedef HRESULT(_cdecl *old_present)(IDXGISwapChain*, UINT, UINT);
 

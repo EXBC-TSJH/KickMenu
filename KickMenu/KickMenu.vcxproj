@@ -159,6 +159,7 @@
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="friends_service.cpp" />
     <ClCompile Include="gta_util.cpp" />
+    <ClCompile Include="invoker.cpp" />
     <ClCompile Include="Kick.cpp" />
     <ClCompile Include="memory\batch.cpp" />
     <ClCompile Include="memory\byte_patch.cpp" />
@@ -173,9 +174,11 @@
     <ClCompile Include="vmt_hook.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="crossmap.hpp" />
     <ClInclude Include="friends_service.hpp" />
     <ClInclude Include="function_types.hpp" />
     <ClInclude Include="gta_util.hpp" />
+    <ClInclude Include="invoker.hpp" />
     <ClInclude Include="Kick.h" />
     <ClInclude Include="memory\all.hpp" />
     <ClInclude Include="memory\batch.hpp" />
@@ -186,11 +189,17 @@
     <ClInclude Include="memory\pattern.hpp" />
     <ClInclude Include="memory\range.hpp" />
     <ClInclude Include="MyUtils.hpp" />
+    <ClInclude Include="natives.hpp" />
     <ClInclude Include="player.hpp" />
     <ClInclude Include="player_service.hpp" />
     <ClInclude Include="pointers.hpp" />
     <ClInclude Include="UI.hpp" />
     <ClInclude Include="vmt_hook.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="invoker_asm.asm">
+      <FileType>Document</FileType>
+    </MASM>
   </ItemGroup>
   <ItemGroup>
     <Library Include="bin\lib\Release\ImGui.lib" />

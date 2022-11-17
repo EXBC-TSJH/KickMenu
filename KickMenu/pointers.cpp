@@ -1,7 +1,6 @@
 #include "common.hpp"
 #include "pointers.hpp"
 #include "memory/all.hpp"
-#include "MyUtils.hpp"
 
 namespace big
 {
@@ -40,15 +39,64 @@ namespace big
 			m_friend_registry = ptr.add(2).rip().as<FriendRegistry*>();
 		});
 
-		// Swapchain , 一个虚函数表的指针,可以通过D3D11CreateDeviceAndSwapChain函数获取
+		// Swapchain
 		main_batch.add("S", "48 8B 0D ? ? ? ? 48 8B 01 44 8D 43 01 33 D2 FF 50 40 8B C8", [this](memory::handle ptr)
 		{
 			m_swapchain = ptr.add(3).rip().as<IDXGISwapChain**>();
 		});
 
+		// Native Handlers
+		main_batch.add("NH", "48 8D 0D ? ? ? ? 48 8B 14 FA E8 ? ? ? ? 48 85 C0 75 0A", [this](memory::handle ptr)
+		{
+			m_native_registration_table = ptr.add(3).rip().as<rage::scrNativeRegistrationTable*>();
+			m_get_native_handler = ptr.add(12).rip().as<functions::get_native_handler>();
+		});
+
+		// Fix Vectors
+		main_batch.add("FV", "83 79 18 00 48 8B D1 74 4A FF 4A 18 48 63 4A 18 48 8D 41 04 48 8B 4C CA", [this](memory::handle ptr)
+		{
+			m_fix_vectors = ptr.as<functions::fix_vectors>();
+		});
+
+		// Native Return Spoofer
+		main_batch.add("NRF", "FF E3", [this](memory::handle ptr)
+		{
+			m_native_return = ptr.add(0).as<PVOID>();
+		});
 //-------------------------------------------------------------------------------------------------------
+
 		auto mem_region = memory::module(nullptr);
 		main_batch.run(mem_region);
+//-------------------------------------------------------------------------------------------------------
+		/**
+		* Freemode thread restorer through VM patch
+		*/
+		
+		if (auto pat1 = mem_region.scan("3b 0a 0f 83 ? ? ? ? 48 ff c7"))
+		{
+			memory::byte_patch::make(pat1.add(2).as<uint32_t*>(), 0xc9310272)->apply();
+			memory::byte_patch::make(pat1.add(6).as<uint16_t*>(), 0x9090)->apply();
+		}
+
+		if (auto pat2 = mem_region.scan("3b 0a 0f 83 ? ? ? ? 49 03 fa"))
+		{
+			memory::byte_patch::make(pat2.add(2).as<uint32_t*>(), 0xc9310272)->apply();
+			memory::byte_patch::make(pat2.add(6).as<uint16_t*>(), 0x9090)->apply();
+		}
+
+		auto pat3 = mem_region.scan_all("3b 11 0f 83 ? ? ? ? 48 ff c7");
+		for (auto& handle : pat3)
+		{
+			memory::byte_patch::make(handle.add(2).as<uint32_t*>(), 0xd2310272)->apply();
+			memory::byte_patch::make(handle.add(6).as<uint16_t*>(), 0x9090)->apply();
+		}
+
+		auto pat4 = mem_region.scan_all("3b 11 0f 83 ? ? ? ? 49 03 fa");
+		for (auto& handle : pat4)
+		{
+			memory::byte_patch::make(handle.add(2).as<uint32_t*>(), 0xd2310272)->apply();
+			memory::byte_patch::make(handle.add(6).as<uint16_t*>(), 0x9090)->apply();
+		}
 //-------------------------------------------------------------------------------------------------------
 		m_hwnd = FindWindowW(L"grcWindow", nullptr);
 

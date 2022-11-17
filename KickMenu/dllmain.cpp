@@ -37,7 +37,7 @@ DWORD WINAPI OnDllAttach(LPVOID base)
 
     auto pointers_instance = std::make_unique<big::pointers>();
     auto player_service_instance = std::make_unique<big::player_service>();
-
+    
     if (!Init_UI())
     {
         big::g_running = false;
@@ -45,7 +45,7 @@ DWORD WINAPI OnDllAttach(LPVOID base)
 
     while (big::g_running)
         Sleep(1000);
-    
+
     UnLoadUI();
 
     player_service_instance.reset();
